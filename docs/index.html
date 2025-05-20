@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"
+</head>
+<body>
+    <h1 > QUILT </h1>
+    <h5>Copyright Nadezda Kataeva</h5>
+    <p>This is a program, which can help to coordinate colors in quilting.<br> You can use it for 
+        <ul>
+        <li>to find new pattern 
+        <li>for inspiration 
+        <li>to play with colors
+    </ul>  
+   
+    You can create your own pattern by clicking triangles on squared canvas.<br> 
+    Or check our swatches by clicking button Next<br>
+    <button type="button" onclick="nextpat()">Next</button></br>
+    And try to repeat by clicking the Repeat button<br>
+<button type="button" onclick="repeat()">Repeat</button></br> 
+<input id="fname" value="file_name"/> <button id="save">Save PNG</button><br>
+For creating a patterned quilt (the pattern will be programmatically repeated)<br>
+ input coords of top left corner:
+<input type="number" id="LeftTopCoordx" value="1" min="1" max="29">
+<input type="number" id="LeftTopCoordy" value="1" min="1" max="9">
+
+and input coords right bottom corner. <br>
+Input length in cells amount for x and y coords:
+<input type="number" id="RightBottomCoordx" value="2" min="1" max="9">
+<input type="number" id="RightBottomCoordy" value="2" min="1" max="9">
+<br>
+To repeat click Boom! button<br>
+<button type="button" onclick="NewPattern()">Boom!</button></br> 
+</p>
+<p>
+To play around you can<br>    choose color:
+<select id="colors"> 
+  	<option value= 'red'>Red</option> 
+  	<option value= 'blue'>Blue</option> 
+  	<option value= 'pink'>Pink</option> 
+  	<option value= 'black'>Black</option> 
+	<option value= 'brown'>Brown</option> 
+	<option value= 'green'>Green</option> 
+</select> and
+choose diagonal:
+<select id="diagonals"> 
+  	<option value= 'bottomleft'>/</option> 
+  	<option value= 'topleft'>\</option> 
+  	</select> 
+<br>
+    </p>
+    
+<canvas id="myCanvas" width="900" height="300" /> 
+
+
+    <script src="quiltscript.js">
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+body{
+    background-color: beige; 
+    color: black; 
+    font-family: 'Courier New', Courier, monospace;
+    display:flexbox;
+    align-items: center;
+    justify-content:center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+ul{
+    align-self: flex-start;
+}
+p{
+    font-family: 'Courier New Cursive', Courier, monospace;
+   font-size: 18px;
+}
+h1 {
+
+    font-size: 60px;
+    color: peru;
+    background-color: wheat;
+}
+button{
+    background-color: pink; 
+    border: peru;
+    border-style: groove;
+    border-radius: 5px;
+    color: white; 
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;}
