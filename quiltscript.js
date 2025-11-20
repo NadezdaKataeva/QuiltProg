@@ -2,8 +2,9 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d"); 
  
 var cellsize=30; 
+console.log("cellsize before = ", cellsize);
 
-
+//var cellsize=30; 
 const pat1 = new Array(3,3,2);
  
 ctx.beginPath(); 
@@ -452,7 +453,7 @@ return true;
 
 
 
-//Sergeys save canvas function
+// save canvas function
 
 document.getElementById("save").addEventListener('click', function() {
 //  var cf = document.getElementById("myCanvas"); 
@@ -576,7 +577,8 @@ console.log("RightBottomCoordxy"+rbcy);
 stepx=rbcx;
 stepy=rbcy;
 
-//var ctx = canvas.getContext("2d");
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 var saved_rect = ctx.getImageData(ltcx*cellsize, ltcy*cellsize, rbcx*cellsize,rbcy*cellsize);
 // highlight the image part ...
 
@@ -590,4 +592,239 @@ ctx.putImageData(saved_rect, stepx*cellsize*k+cellsize, stepy*cellsize*m+cellsiz
 }
 }
 
+
 }
+function stitchPattern(){
+	ltcx=document.getElementById("LeftTopCoordx").value;
+console.log("--LeftTopCoordx "+ltcx);
+ltcy=document.getElementById("LeftTopCoordy").value;
+console.log("--LeftTopCoordy"+ltcy);
+rbcx=document.getElementById("RightBottomCoordx").value;
+console.log("--RightBottomCoordx"+rbcx);
+rbcy=document.getElementById("RightBottomCoordy").value;
+console.log("--RightBottomCoordxy"+rbcy);
+//	ctx.scale(0.5, 0.5);
+	var saved_rect = ctx.getImageData((ltcx)*cellsize, (ltcy)*cellsize, (rbcx-ltcx+1)*cellsize,(rbcy-ltcy+1)*cellsize);
+	
+//	ctx.putImageData(saved_rect,120,120);
+	//console.log((ltcx-1)*cellsize,"width=", saved_rect.width, "height", saved_rect.height);
+	var pixelData=saved_rect.data;
+	var n=3*(rbcx-ltcx+1);
+	var m=3*(rbcy-ltcy+1);
+	console.log("n=",n,"m=",m);
+
+	//console.log("saved rect", saved_rect );
+
+	
+
+	console.log("kx=",kx,"ky=",ky);
+//color.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+	var y=(rbcy-ltcy)*m;
+	var x=(rbcx-ltcx)*n;
+
+
+//console.log("y=",y,"x=",x);
+//var canvasColor = saved_rect.getImageData(ltcx, ltcy, 1, 1).data; // rgba e [0,255]
+	var kx=saved_rect.width/x;
+	var ky=saved_rect.height/y;
+var canvasColor = saved_rect.data;
+
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+//const hexColor = rgbToHex(r, g, b);
+//console.log(`RGB: (${r}, ${g}, ${b})`); // Output: RGB: (255, 0, 0)
+//console.log(`Hex: ${hexColor}`);  
+
+    			
+				
+	
+				/*
+	for (let i=0; i<n;i++){
+		for (let j=0; j<m;j++){
+			var canvasColor = saved_rect.getImageData(ltcx+i*0.1, ltcy+j*0.1, 1, 1).data; // rgba e [0,255]
+    			var r = canvasColor[0];
+   			 	var g = canvasColor[1];
+    			var b = canvasColor[2];
+				console.log("rgb="+r+g+b);
+		}
+	}
+	*/
+	function tableCreate(x,y) {
+		
+		const body = document.body,
+			tbl = document.createElement('table');
+		//tbl.style.width = '100px';
+			tbl.style.border = '1px solid black';
+			tbl.style.alignContent ="centre";
+			tbl.style.aspectRatio = "1/1";
+		//how many rows nd cells?
+		
+	   //console.log("width=",canvasColor.width);
+	   //index=(kx/2+ky/2)*4;
+	   //index=9;
+	   console.log("data length", saved_rect.data.length);
+	   console.log("width=",saved_rect.width,"height=",saved_rect.height);
+	   var index=0;
+	  
+	   let k=0;
+	   let l=0;
+	   let f=0;
+	   
+
+		for (let i = 0; i <saved_rect.height/3; i++	) { 
+		  	const tr = tbl.insertRow();
+			k=0;
+			var r = canvasColor[0];
+   			var g = canvasColor[1];
+    		var b = canvasColor[2];
+			var curr_color=rgbToHex(r, g, b);
+		  	for (let j = 0; j <saved_rect.width/3	;j++) {
+			  const td = tr.insertCell();
+			  
+			 // td.appendChild(document.createTextNode(`${k}`));
+			 td.appendChild(document.createTextNode(``)); 
+			 td.style.border = '1px solid black';
+			 td.style.aspectRatio = '1 / 1';
+			  
+			  if ((index+2)<saved_rect.data.length){
+			  	r = canvasColor[index+0];
+   			 	g = canvasColor[index+1];
+    		 	b = canvasColor[index+2];
+			
+				td.style.backgroundColor=rgbToHex(r, g, b);
+
+
+				if (((i%15)==6)&&((j%15)==4)){  f++;
+					console.log("this is 6,4 in "+i+" and "+j+" f="+f+" color="+td.style.backgroundColor); }
+				if (((i%15)==12)&&((j%15)==7)){  f++;
+					console.log("this is 12,7 in "+i+" and "+j+" f="+f+" color="+td.style.backgroundColor);};
+				if (((i%15)==8)&&((j%15)==12)){ f++;
+					 console.log("this is 8,12 in "+i+" and "+j+" f="+f+" color="+td.style.backgroundColor);};
+				if (((i%15)==4)&&((j%16)==8)){ f++;
+					console.log("this is 4,8 in "+i+" and "+j+" f="+f+" color="+td.style.backgroundColor);};
+				   
+
+				if (td.style.backgroundColor=="black"){
+					td.style.color="white";
+				}
+				else td.style.color="black";
+				if (curr_color==rgbToHex(r, g, b)){
+					k++;
+					if (k<10) {td.innerText="_"+k;}
+					else {td.innerText=""+k;}
+				
+				} 
+				else
+				{
+					k=1;
+					curr_color=rgbToHex(r,g,b);
+					td.innerText="_1";
+				}
+			  }
+			  else break;
+			
+			 index=(index+4)+4+4;
+			// console.log(index);
+			  //td.style.backgroundColor=r+ g+ b;
+		  }
+		  index=index+saved_rect.width*4+saved_rect.width*4;
+		}
+
+		
+
+
+		body.appendChild(tbl);
+// lets brush up a bit the table
+const tableRows = tbl.rows; // This is an HTMLCollection
+
+console.log("Table has"+(tableRows.length)/15+" cells wide")
+const row = tableRows[0];
+const rowCells = row.cells; // HTMLCollection of cells in the current row
+console.log("Table has"+(rowCells.length)/15+" cells in height")
+
+for (let i = 0; i < tableRows.length; i++) {
+	const row = tableRows[i];
+	const rowCells = row.cells; // HTMLCollection of cells in the current row
+	//console.log("Table has"+(rowCells.length)/15+" cells in height")
+
+	for (let j = 0; j < rowCells.length; j++) {
+		const cell = rowCells[j];
+		const cellContent = cell.style.backgroundColor; // Get the text content of the cell
+		//if ((cellContent!="black")&&(cellContent!="pink")&&(cellContent!="red")&&(cellContent!="green")
+	//	&&(cellContent!="blue")&&(cellContent!="brown")){
+		// Or cell.innerHTML for HTML content
+	//	console.log(` Row ${i}, Cell ${j}: ${cellContent}`);}
+	switch (cellContent) {
+		case "rgb(0, 0, 0)":
+	//	{console.log('black=' ,cellContent)};
+		break;
+		case "rgb(255, 0, 0)":
+	//	{console.log('red=', cellContent)};
+		break;
+		case "rgb(0, 0, 255)":
+	//	{console.log('blue=', cellContent)};
+		break;
+		case "rgb(0, 128, 0)":
+	//	{console.log('green=', cellContent)};
+		break;
+		case "rgb(165, 42, 42)":
+	//	{console.log('brown=',cellContent)};
+		break;
+		case "rgb(255, 192, 203)":
+	//	{console.log('pink=', cellContent)};
+		break;
+		default:
+		{console.log(` Row ${i}, Cell ${j}: ${cellContent}`);}
+	}
+}
+}
+/*
+const tableData = Array.from(tbl.rows).map(row => {
+	return Array.from(row.cells).map(cell => cell.style.backgroundColor);
+});
+*/
+//console.log("here ",tableData); // This will be a 2D array of cell contents
+		//countColors();
+		ctx.save();
+		const newWindow = window.open("", "_blank", "width=600,height=400");
+		const newDocument = newWindow.document;
+	
+			if (newWindow) { // Check if the window was successfully opened (not blocked by pop-up blocker)
+				newWindow.document.write(`
+					<!DOCTYPE html>
+					<html>
+					<head>
+					${tbl}
+					</head>
+					<body>
+						
+					</body>
+					</html>
+				`);
+				newDocument.body.appendChild(tbl);
+				newWindow.document.close(); // Close the document stream to ensure content is rendered
+			} else {
+				alert("Pop-up blocked! Please allow pop-ups for this site.");
+		}
+			
+		
+		
+		}
+		
+	
+	  console.log("cellsize before = ", cellsize);
+	  tableCreate(x,y);
+	  console.log("cellsize after = ", cellsize);
+	  ctx.restore();
+	 // tablePlace();
+	  
+	
+	 
+}//stitchPat
