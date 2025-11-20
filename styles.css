@@ -9,9 +9,6 @@ body{
     flex-wrap: wrap;
     text-align: center;
 }
-ul{
-    align-self: flex-start;
-}
 p{
     font-family: 'Courier New Cursive', Courier, monospace;
    font-size: 18px;
