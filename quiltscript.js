@@ -1,12 +1,10 @@
 var c = document.getElementById("myCanvas"); 
-var ctx = c.getContext("2d"); 
- 
+var ctx = c.getContext("2d");  
 var cellsize=30; 
-console.log("cellsize before = ", cellsize);
+const pat1 = new Array(3,3,2); 
 
-//var cellsize=30; 
-const pat1 = new Array(3,3,2);
- 
+
+
 ctx.beginPath(); 
 
 
@@ -14,33 +12,27 @@ ctx.beginPath();
 drawlines()
 
 function drawlines(){
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(0, 0, 900,300);
+	ruler()
 
-ctx.fillStyle = "#FFFFFF";
+	//draw vertical lines on canvas;
+	for(var j = 0; j < 900; j++){  
+		ctx.moveTo(j*cellsize,0); 
+		ctx.lineTo(j*cellsize, 300); 
+		ctx.stroke(); 
+	} 
 
-ctx.fillRect(0, 0, 900,300);
-ruler()
-//draw vertical lines on canvas;
-for(var j = 0; j < 900; j++) 
- {  
-	ctx.moveTo(j*cellsize,0); 
-	ctx.lineTo(j*cellsize, 300); 
-	ctx.stroke(); 
- } 
+	//draw horisontal lines on canvas;	
+	for(var j = 0; j < 300; j++){  
+		ctx.moveTo(0,j*cellsize); 
+		ctx.lineTo(900,j*cellsize); 
+		ctx.stroke();  
+	}  
+}
 
 
-//ctx.stroke(); 
- 
-//draw horisontal lines on canvas;
- 
-for(var j = 0; j < 300; j++) 
- {  
-	ctx.moveTo(0,j*cellsize); 
-	ctx.lineTo(900,j*cellsize); 
-	ctx.stroke();  
- } 
- 
-}//draw lines 
- 
+
 function ruler() { 
 
 	ctx.font = "18px Arial"; 
