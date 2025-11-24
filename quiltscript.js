@@ -143,14 +143,15 @@ function clearcanv(){
 
 
 function nextpat(){
-curr=curr+1;
-console.log("curr"+curr+", length "+pats.length);
-if (curr==pats.length) { curr = 0;}
+	curr=curr+1;
+	console.log("curr"+curr+", length "+pats.length);
+	if(curr==pats.length){
+		curr = 0;
+	}
 
-clearcanv();
-DrawPttrn(0,0);
-}//nextpat()
-
+	clearcanv();
+	DrawPttrn(0,0);
+}
 
 
 
