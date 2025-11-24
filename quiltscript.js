@@ -34,36 +34,28 @@ function drawlines(){
 
 
 function ruler() { 
-
 	ctx.font = "18px Arial"; 
-
 	ctx.fillStyle = "grey"; 
 	ctx.fillRect(0, 0, 900, cellsize); 
 	ctx.fillRect(0, cellsize,  cellsize, 600);
 	ctx.fillStyle = "red"; 
-	for(var j = 0; j < 30; j++) 
-	 {  
-		 
-		if (j<9) { 
-		ctx.fillText(j,j*cellsize+5,cellsize-5); 
-		 } 
-		else { 
-		ctx.fillText(j,j*cellsize+1,cellsize-5); 
-		 } 
+	for(var j = 0; j < 30; j++){  
+		if (j<9){ 
+			ctx.fillText(j,j*cellsize+5,cellsize-5); 
+		} 
+		else{ 
+			ctx.fillText(j,j*cellsize+1,cellsize-5); 
+		} 
+	} 
+	for(var j = 0; j < 10; j++) { 
+		if (j<9){
+			ctx.fillText(j,5,j*cellsize+20); 
+		} 
+		else{ 
+			ctx.fillText(j,5,j*cellsize+20); 
+		} 
 	 } 
-	for(var j = 0; j < 10; j++) 
-	 { 
-		if (j<9) { 
-		ctx.fillText(j,5,j*cellsize+20); 
-		 } 
-		else { 
-		ctx.fillText(j,5,j*cellsize+20); 
-		 } 
-	 } 
- 
- 
-  
- };//end ruler() 
+};
 
 
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
