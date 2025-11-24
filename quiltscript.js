@@ -92,8 +92,6 @@ var pat3=[
 [2,2,0,"brown"],
 [2,2,1,"green"]
 ];
-
-
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
 var pat6=[
 [3,2],
@@ -110,9 +108,6 @@ var pat6=[
 [2,1,0,"black"],
 [2,1,1,"blue"],
 ];
-
-
-
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
 var pat4=[
 [2,3],
@@ -131,9 +126,6 @@ var pat4=[
 [1,2,0,"blue"],
 ];
 
-
-
-
 var pats = [pat2, pat3, pat4, pat6];
 
 
@@ -143,11 +135,10 @@ var curr = 0;
 
 
 function clearcanv(){
-
-ctx.fillStyle = "#FFFFFF";
-ctx.clearRect(0, 0, c.width, c.height);
-//c.fillRect(0, 0,900,300);
-drawlines();
+	ctx.fillStyle = "#FFFFFF";
+	ctx.clearRect(0, 0, c.width, c.height);
+	//c.fillRect(0, 0,900,300);
+	drawlines();
 }
 
 
