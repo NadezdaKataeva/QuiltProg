@@ -1,12 +1,10 @@
 var c = document.getElementById("myCanvas"); 
-var ctx = c.getContext("2d"); 
- 
+var ctx = c.getContext("2d");  
 var cellsize=30; 
-console.log("cellsize before = ", cellsize);
+const pat1 = new Array(3,3,2); 
 
-//var cellsize=30; 
-const pat1 = new Array(3,3,2);
- 
+
+
 ctx.beginPath(); 
 
 
@@ -14,64 +12,50 @@ ctx.beginPath();
 drawlines()
 
 function drawlines(){
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(0, 0, 900,300);
+	ruler()
 
-ctx.fillStyle = "#FFFFFF";
+	//draw vertical lines on canvas;
+	for(var j = 0; j < 900; j++){  
+		ctx.moveTo(j*cellsize,0); 
+		ctx.lineTo(j*cellsize, 300); 
+		ctx.stroke(); 
+	} 
 
-ctx.fillRect(0, 0, 900,300);
-ruler()
-//draw vertical lines on canvas;
-for(var j = 0; j < 900; j++) 
- {  
-	ctx.moveTo(j*cellsize,0); 
-	ctx.lineTo(j*cellsize, 300); 
-	ctx.stroke(); 
- } 
+	//draw horisontal lines on canvas;	
+	for(var j = 0; j < 300; j++){  
+		ctx.moveTo(0,j*cellsize); 
+		ctx.lineTo(900,j*cellsize); 
+		ctx.stroke();  
+	}  
+}
 
 
-//ctx.stroke(); 
- 
-//draw horisontal lines on canvas;
- 
-for(var j = 0; j < 300; j++) 
- {  
-	ctx.moveTo(0,j*cellsize); 
-	ctx.lineTo(900,j*cellsize); 
-	ctx.stroke();  
- } 
- 
-}//draw lines 
- 
+
 function ruler() { 
-
 	ctx.font = "18px Arial"; 
-
 	ctx.fillStyle = "grey"; 
 	ctx.fillRect(0, 0, 900, cellsize); 
 	ctx.fillRect(0, cellsize,  cellsize, 600);
 	ctx.fillStyle = "red"; 
-	for(var j = 0; j < 30; j++) 
-	 {  
-		 
-		if (j<9) { 
-		ctx.fillText(j,j*cellsize+5,cellsize-5); 
-		 } 
-		else { 
-		ctx.fillText(j,j*cellsize+1,cellsize-5); 
-		 } 
+	for(var j = 0; j < 30; j++){  
+		if (j<9){ 
+			ctx.fillText(j,j*cellsize+5,cellsize-5); 
+		} 
+		else{ 
+			ctx.fillText(j,j*cellsize+1,cellsize-5); 
+		} 
+	} 
+	for(var j = 0; j < 10; j++) { 
+		if (j<9){
+			ctx.fillText(j,5,j*cellsize+20); 
+		} 
+		else{ 
+			ctx.fillText(j,5,j*cellsize+20); 
+		} 
 	 } 
-	for(var j = 0; j < 10; j++) 
-	 { 
-		if (j<9) { 
-		ctx.fillText(j,5,j*cellsize+20); 
-		 } 
-		else { 
-		ctx.fillText(j,5,j*cellsize+20); 
-		 } 
-	 } 
- 
- 
-  
- };//end ruler() 
+};
 
 
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
@@ -108,8 +92,6 @@ var pat3=[
 [2,2,0,"brown"],
 [2,2,1,"green"]
 ];
-
-
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
 var pat6=[
 [3,2],
@@ -126,9 +108,6 @@ var pat6=[
 [2,1,0,"black"],
 [2,1,1,"blue"],
 ];
-
-
-
 //0 means top right triangle, 1 bottom left triangle, 2 top left triangle, 3 bottom right triangle. first two are cells x and y coords 
 var pat4=[
 [2,3],
@@ -147,9 +126,6 @@ var pat4=[
 [1,2,0,"blue"],
 ];
 
-
-
-
 var pats = [pat2, pat3, pat4, pat6];
 
 
@@ -159,23 +135,23 @@ var curr = 0;
 
 
 function clearcanv(){
-
-ctx.fillStyle = "#FFFFFF";
-ctx.clearRect(0, 0, c.width, c.height);
-//c.fillRect(0, 0,900,300);
-drawlines();
+	ctx.fillStyle = "#FFFFFF";
+	ctx.clearRect(0, 0, c.width, c.height);
+	//c.fillRect(0, 0,900,300);
+	drawlines();
 }
 
 
 function nextpat(){
-curr=curr+1;
-console.log("curr"+curr+", length "+pats.length);
-if (curr==pats.length) { curr = 0;}
+	curr=curr+1;
+	console.log("curr"+curr+", length "+pats.length);
+	if(curr==pats.length){
+		curr = 0;
+	}
 
-clearcanv();
-DrawPttrn(0,0);
-}//nextpat()
-
+	clearcanv();
+	DrawPttrn(0,0);
+}
 
 
 
