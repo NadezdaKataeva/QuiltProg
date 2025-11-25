@@ -744,10 +744,10 @@ function rgbToHex(r, g, b) {
 // lets brush up a bit the table
 const tableRows = tbl.rows; // This is an HTMLCollection
 
-console.log("Table has"+(tableRows.length)/15+" cells wide")
+//console.log("Table has"+(tableRows.length)/15+" cells wide")
 const row = tableRows[0];
 const rowCells = row.cells; // HTMLCollection of cells in the current row
-console.log("Table has"+(rowCells.length)/15+" cells in height")
+//console.log("Table has"+(rowCells.length)/15+" cells in height")
 
 for (let i = 0; i < tableRows.length; i++) {
 	const row = tableRows[i];
