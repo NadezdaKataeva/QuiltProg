@@ -1,5 +1,7 @@
 var c = document.getElementById("myCanvas"); 
-var ctx = c.getContext("2d");  
+var ctx = c.getContext("2d");
+const linearGradient = ctx.createLinearGradient(30, 30, 60, 60);
+ 
 var cellsize=30; 
 const pat1 = new Array(3,3,2); 
 
@@ -13,6 +15,9 @@ drawlines()
 
 function drawlines(){
 	ctx.fillStyle = "#FFFFFF";
+	//linearGradient.addColorStop(0, '#652866'); // Start color  at 0%
+    //linearGradient.addColorStop(1, '#FFFFFF'); // End color (White) at 100%
+	//ctx.fillStyle = linearGradient; 
 	ctx.fillRect(0, 0, 900,300);
 	ruler()
 
@@ -190,6 +195,7 @@ for(i=0;i<pats[curr].length;i++)
 				case "green":
   					ctx.fillStyle = "green"; 
     					break;
+				
   				default:
 					ctx.fillStyle = "black"; 
   				 	break;
@@ -204,6 +210,7 @@ if (pats[curr][i][2]==0)
 	ctx.lineTo((cellsize+pats[curr][i][0]*cellsize+cellsize),(cellsize+pats[curr][i][1]*cellsize+cellsize));
 	ctx.closePath();
 	//ctx.stroke();
+
 	ctx.fill();
 }
 
@@ -259,11 +266,11 @@ c.addEventListener('click',function(event)  {
     guessY = y; 
    	console.log("x coords: " + guessX + ", y coords: " + guessY); 
  
-	console.log("x topleftcorner X cell coords:" +topleftcornerX(guessX,cellsize));
-	console.log("x topleftcorner Y cell coords:" +topleftcornerX(guessY,cellsize));
+	//console.log("x topleftcorner X cell coords:" +topleftcornerX(guessX,cellsize));
+	//console.log("x topleftcorner Y cell coords:" +topleftcornerX(guessY,cellsize));
 
 
-console.log("x bottom right corner, Y bottom right corner cell coords:" +bottomrightcornerX(guessX,cellsize)+"     " +bottomrightcornerY(guessY,cellsize));
+//console.log("x bottom right corner, Y bottom right corner cell coords:" +bottomrightcornerX(guessX,cellsize)+"     " +bottomrightcornerY(guessY,cellsize));
 
 
 //check type of diagonal is chosen
@@ -281,12 +288,19 @@ switch(color) {
   		ctx.fillStyle = "brown"; 
     		break;
 	case "pink":
-  		ctx.fillStyle = "pink"; 
+  		ctx.fillStyle = "pink";
+	//	linearGradient.addColorStop(0, '#652866'); // Start color  at 0%
+    //linearGradient.addColorStop(1, '#FFFFFF'); // End color (White) at 100%
+	//ctx.fillStyle = linearGradient;  
     		break;
 	case "green":
   		ctx.fillStyle = "green"; 
     		break;
-
+	case "black-white":
+		linearGradient.addColorStop(0, '#000000'); // Start color  at 0%
+    	linearGradient.addColorStop(0.5, '#FFFFFF'); // End color (White) at 100%
+		ctx.fillStyle = linearGradient;
+			break;
   	default:
 		ctx.fillStyle = "black"; 
     		break;
